@@ -66,10 +66,10 @@ const EnvelopeOverlay = ({ onReveal }) => {
             }
             transition={{ duration: 0.8, delay: isRevealing ? 0.5 : 0, ease: [0.34, 1.56, 0.64, 1] }}
           >
-            <div className="text-center px-5 py-3 w-full">
+            <div className="text-center px-3 py-1.5 w-full flex flex-col items-center justify-center">
               {/* Bismillah */}
-              <p className="font-sans mb-3" style={{
-                fontSize: '11px',
+              <p className="font-sans mb-1" style={{
+                fontSize: '10px',
                 color: 'rgba(80,55,10,0.55)',
                 letterSpacing: '0.04em',
                 direction: 'rtl',
@@ -79,13 +79,13 @@ const EnvelopeOverlay = ({ onReveal }) => {
               </p>
 
               {/* Top ornament */}
-              <div className="flex items-center justify-center gap-2 mb-3">
+              <div className="flex items-center justify-center gap-2 mb-1.5 w-full">
                 <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, rgba(100,70,10,0.35))' }} />
-                <svg width="8" height="8" viewBox="0 0 8 8"><polygon points="4,0 8,4 4,8 0,4" fill="rgba(139,105,20,0.4)"/></svg>
+                <svg width="6" height="6" viewBox="0 0 8 8"><polygon points="4,0 8,4 4,8 0,4" fill="rgba(139,105,20,0.4)"/></svg>
                 <div className="h-px flex-1" style={{ background: 'linear-gradient(-90deg, transparent, rgba(100,70,10,0.35))' }} />
               </div>
 
-              <p style={{ color: 'rgba(50,35,5,0.45)', fontSize: '7px', letterSpacing: '0.4em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif', marginBottom: '6px' }}>
+              <p style={{ color: 'rgba(50,35,5,0.45)', fontSize: '7px', letterSpacing: '0.35em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif', marginBottom: '3px' }}>
                 Wedding Invitation
               </p>
 
@@ -93,26 +93,26 @@ const EnvelopeOverlay = ({ onReveal }) => {
               <p style={{
                 fontFamily: '"Cormorant Garamond", serif',
                 fontStyle: 'italic',
-                fontSize: '1.6rem',
+                fontSize: '1.4rem',
                 fontWeight: 400,
                 color: 'transparent',
                 backgroundImage: 'linear-gradient(135deg, #6B4F0A 0%, #B8860B 40%, #8B6914 70%, #6B4F0A 100%)',
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
-                lineHeight: 1.2,
-                marginBottom: '6px',
+                lineHeight: 1.1,
+                marginBottom: '3px',
               }}>
                 Nazir &amp; Aliya
               </p>
 
               {/* Bottom ornament */}
-              <div className="flex items-center justify-center gap-2 mt-2">
+              <div className="flex items-center justify-center gap-2 mt-1 w-full">
                 <div className="h-px flex-1" style={{ background: 'linear-gradient(90deg, transparent, rgba(100,70,10,0.3))' }} />
                 <div className="w-1 h-1 rounded-full" style={{ background: 'rgba(139,105,20,0.35)' }} />
                 <div className="h-px flex-1" style={{ background: 'linear-gradient(-90deg, transparent, rgba(100,70,10,0.3))' }} />
               </div>
 
-              <p style={{ color: 'rgba(50,35,5,0.35)', fontSize: '6px', letterSpacing: '0.3em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif', marginTop: '6px' }}>
+              <p style={{ color: 'rgba(50,35,5,0.35)', fontSize: '6px', letterSpacing: '0.25em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif', marginTop: '3px' }}>
                 5 &amp; 6 December 2026
               </p>
             </div>
