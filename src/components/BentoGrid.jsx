@@ -100,7 +100,7 @@ const BentoGrid = () => (
           title="Venue location map"
           src={wedding.mapsEmbedUrl}
           className="w-full h-full border-0 transition-all duration-700"
-          style={{ filter: 'grayscale(1) contrast(1.1) opacity(0.65)' }}
+          style={{ filter: 'none' }}
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           allowFullScreen

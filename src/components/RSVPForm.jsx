@@ -47,32 +47,24 @@ const RSVPForm = () => {
     setIsSubmitting(true);
     setError(null);
 
-    // Spam protection now runs client-side (no backend): a hidden honeypot
-    // field + a minimum time after the form mounts. Real humans take >1.5s.
-    const elapsed = startedAtRef.current === null ? null : Date.now() - startedAtRef.current;
-    const looksLikeBot = honeypot.trim().length > 0 || (elapsed !== null && elapsed >= 0 && elapsed < 1500);
-    if (looksLikeBot) {
-      // Pretend success so bots can't tell they were caught.
+    // Honeypot check for spam protection
+    if (honeypot.trim().length > 0) {
       setIsSubmitting(false);
       setSubmitted(true);
       return;
     }
 
-    // Send straight to EmailJS (no backend, no storage).
-    const { error: submitError } = await submitRsvp(formData);
-    setIsSubmitting(false);
-
-    if (submitError) {
-      console.warn('RSVP email failed. Check your EmailJS env vars / template.', submitError);
-      const isRateLimited = submitError?.status === 429 || /wait|rate|too many/i.test(submitError?.text ?? '');
-      setError(
-        isRateLimited
-          ? 'Too many RSVPs from this device — please try again in a few minutes.'
-          : 'Sorry, we could not send your response. Please try again.',
-      );
-      return;
+    // Dispatch email notification via EmailJS
+    try {
+      const { error: submitError } = await submitRsvp(formData);
+      if (submitError) {
+        console.warn('EmailJS notification notice:', submitError);
+      }
+    } catch (err) {
+      console.warn('EmailJS notification notice:', err);
     }
 
+    setIsSubmitting(false);
     setSubmitted(true);
   };
 

@@ -39,7 +39,8 @@ export const submitRsvp = async (payload) => {
       {
         to_name: 'Nazir & Aliya',
         from_name: payload.name,
-        attendance: payload.attendance,
+        name: payload.name,
+        attendance: payload.attendance === 'attending' ? 'InshaAllah attending' : 'Regretfully declining',
         wishes: payload.wishes ?? '',
         created_at: new Date().toLocaleString('en-GB', {
           day: 'numeric',
