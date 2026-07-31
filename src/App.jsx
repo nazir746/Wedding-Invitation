@@ -24,10 +24,10 @@ function App() {
       <Particles />
       <AudioToggle />
 
-      {/* Mobile ambient glow */}
+      {/* Mobile ambient glow - using radial-gradients instead of filter:blur for iOS performance */}
       <div className="fixed inset-0 md:hidden z-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div className="aurora-blob w-72 h-72 -top-20 -left-24 bg-gold/10 opacity-70" />
-        <div className="aurora-blob w-80 h-80 -bottom-24 -right-28 bg-emerald/15 opacity-60" />
+        <div className="absolute w-[400px] h-[400px] -top-32 -left-32 opacity-60" style={{ background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 60%)' }} />
+        <div className="absolute w-[400px] h-[400px] -bottom-32 -right-32 opacity-50" style={{ background: 'radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 60%)' }} />
       </div>
 
       {/* Desktop Ambient Background */}

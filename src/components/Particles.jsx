@@ -27,7 +27,8 @@ const Particles = () => {
             ease: 'linear',
             delay: p.delay,
           }}
-          className="absolute w-1 h-1 bg-gold rounded-full blur-[1px]"
+          className="absolute w-1.5 h-1.5 rounded-full"
+          style={{ background: 'radial-gradient(circle, rgba(212,175,55,1) 0%, rgba(212,175,55,0) 70%)' }}
         />
       ))}
     </div>
