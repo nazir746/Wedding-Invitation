@@ -28,12 +28,16 @@ const RSVPForm = () => {
 
   // Spam protection:
   // - honeypot: a hidden field only bots fill in (humans never see it)
-  // - startedAt: when the form mounted, so the server can reject instant submits
+  // - startedAt: when the form mounted, so the server can reject instant submits.
+  //   Lazy-initialized inside an effect (not useRef(Date.now())) to satisfy the
+  //   React purity lint rule.
   const [honeypot, setHoneypot] = useState('');
-  const startedAtRef = useRef(Date.now());
+  const startedAtRef = useRef(null);
 
-  // Persist draft + submitted flag together
+  // Persist draft + submitted flag together; also stamp the form mount time
+  // once (used by the server's anti-bot min-time check)
   useEffect(() => {
+    if (startedAtRef.current === null) startedAtRef.current = Date.now();
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ form: formData, submitted }));
   }, [formData, submitted]);
 
@@ -47,14 +51,18 @@ const RSVPForm = () => {
     // Include the honeypot + start time so the function can filter bots.
     const { error: submitError } = await submitRsvp({
       ...formData,
-      website: honeypot,           // honeypot — always '' for real humans
-      started_at: startedAtRef.current, // form mount time (epoch ms)
+      website: honeypot,               // honeypot — always '' for real humans
+      started_at: startedAtRef.current, // form mount time (epoch ms); set on mount
     });
     setIsSubmitting(false);
 
     if (submitError) {
       console.warn('RSVP submission failed. Check .env.local / Supabase setup.', submitError);
-      setError('Sorry, we could not send your response. Please try again.');
+      if (submitError?.context?.status === 429) {
+        setError('Too many RSVPs from this device — please try again in a few minutes.');
+      } else {
+        setError('Sorry, we could not send your response. Please try again.');
+      }
       return;
     }
 

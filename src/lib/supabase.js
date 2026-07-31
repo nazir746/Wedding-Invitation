@@ -31,7 +31,7 @@ export const submitRsvp = async (payload) => {
       created_at: new Date().toISOString(),
       // Spam protection passthrough (honeypot + form start time)
       website: payload.website ?? '',
-      started_at: payload.started_at ?? Date.now(),
+      started_at: payload.started_at,
     },
   });
 

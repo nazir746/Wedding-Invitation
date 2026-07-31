@@ -40,7 +40,7 @@ export const wedding = {
     'https://www.google.com/maps/dir/?api=1&destination=23.6498716,72.893228',
 
   // ── Music ──
-  musicUrl: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+  musicUrl: '/shukran_allah_remix.mp3',
 
   // ── Social ──
   hashtag: '#NazirAndAliya',

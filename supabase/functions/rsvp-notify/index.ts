@@ -7,8 +7,8 @@
 //
 //  Spam protection (best-effort, in-memory):
 //    • Honeypot fields  — hidden inputs bots auto-fill; humans never see them.
-//    • Min submit time  — payload.started_at (epoch ms) must be > 3s old,
-//                         because bots submit instantly.
+//    • Min submit time  — payload.started_at (epoch ms) must be > 1.5s old
+//                         (and must be present); bots submit instantly.
 //    • Per-IP rate cap  — at most 5 emails per 10 minutes per client IP.
 //      Note: in-memory state is per warm instance; Supabase may run several,
 //      so this is a deterrent, not a hard guarantee.
@@ -32,7 +32,7 @@ const FROM_NAME = Deno.env.get('GMAIL_FROM_NAME') ?? 'Nazir & Aliya';
 
 // ── Spam protection ──
 const HONEYPOT_FIELDS = ['website', 'company', 'phone'];
-const MIN_SUBMIT_MS = 3000;            // humans take >3s; bots submit instantly
+const MIN_SUBMIT_MS = 1500;            // humans take >1.5s after page load; bots submit instantly
 const RATE_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
 const RATE_MAX_PER_IP = 5;             // max emails per IP per window
 const submissions = new Map();         // ip -> number[] of timestamps
@@ -142,17 +142,30 @@ Deno.serve(async (req) => {
     //    Pretend success so scrapers can't learn they were caught.
     for (const f of HONEYPOT_FIELDS) {
       if (typeof payload[f] === 'string' && payload[f].trim().length > 0) {
+        console.log('rsvp-notify: honeypot triggered', { field: f });
         return json({ ok: true, ignored: true });
       }
     }
 
-    // 2) Too fast to be human = bot.
-    if (typeof payload.started_at === 'number' && Date.now() - payload.started_at < MIN_SUBMIT_MS) {
+    // 2) Too fast to be human = bot. The form always sends started_at (epoch
+    //    ms), so a missing value is suspicious too. Guard against clock skew:
+    //    only enforce when the client timestamp is NOT in the future relative
+    //    to the server (negative elapsed), so users with fast clocks are never
+    //    blocked.
+    if (typeof payload.started_at !== 'number') {
+      console.log('rsvp-notify: rejected missing started_at');
+      return json({ ok: true, ignored: true });
+    }
+    const elapsed = Date.now() - payload.started_at;
+    if (elapsed >= 0 && elapsed < MIN_SUBMIT_MS) {
+      console.log('rsvp-notify: rejected too-fast submit', { elapsed });
       return json({ ok: true, ignored: true });
     }
 
     // 3) Per-IP rate limit.
-    if (isRateLimited(getClientIp(req))) {
+    const ip = getClientIp(req);
+    if (isRateLimited(ip)) {
+      console.log('rsvp-notify: rate limited', { ip });
       return json({ ok: false, error: 'Too many RSVPs — please try again later.' }, 429);
     }
 
