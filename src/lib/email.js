@@ -49,7 +49,7 @@ export const submitRsvp = async (payload) => {
           minute: '2-digit',
         }),
       },
-      { publicKey: PUBLIC_KEY },
+      PUBLIC_KEY,
     );
 
     return { data: response, error: null };
