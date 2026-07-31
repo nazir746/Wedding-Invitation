@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import EnvelopeOverlay from './components/EnvelopeOverlay';
 import Countdown from './components/Countdown';
 import BentoGrid from './components/BentoGrid';
 import RSVPForm from './components/RSVPForm';
-import Preloader from './components/Preloader';
 import AudioToggle from './components/AudioToggle';
 import Particles from './components/Particles';
 import ScrollProgress from './components/ScrollProgress';
