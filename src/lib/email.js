@@ -37,6 +37,7 @@ export const submitRsvp = async (payload) => {
       SERVICE_ID,
       TEMPLATE_ID,
       {
+        to_email: 'naziraman7@gmail.com',
         to_name: 'Nazir & Aliya',
         from_name: payload.name,
         name: payload.name,
