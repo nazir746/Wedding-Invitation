@@ -3,17 +3,17 @@ import { useState, useEffect } from 'react';
 const pad = (n) => String(n).padStart(2, '0');
 
 const CountdownBox = ({ value, label }) => (
-  <div className="countdown-box flex flex-col items-center min-w-[56px]">
-    <div className="w-12 h-10 flex items-center justify-center">
+  <div className="countdown-box flex flex-col items-center min-w-[46px] sm:min-w-[54px]">
+    <div className="w-10 sm:w-12 h-9 sm:h-10 flex items-center justify-center">
       <span
-        className="text-3xl md:text-4xl tabular-nums gold-gradient-text block text-center"
+        className="text-2xl sm:text-3xl md:text-4xl tabular-nums gold-gradient-text block text-center"
         style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 300, lineHeight: 1 }}
       >
         {pad(value)}
       </span>
     </div>
     <span
-      className="text-[9px] uppercase tracking-[0.3em] mt-2 font-sans"
+      className="text-[8px] sm:text-[9px] uppercase tracking-[0.25em] sm:tracking-[0.3em] mt-1.5 font-sans"
       style={{ color: 'rgba(212,175,55,0.45)' }}
     >
       {label}
@@ -57,17 +57,17 @@ const Countdown = ({ targetDate }) => {
     );
 
   return (
-    <div className="flex justify-center gap-3 md:gap-5">
+    <div className="flex justify-center items-center gap-1.5 sm:gap-3 md:gap-5 w-full max-w-full">
       <CountdownBox value={timeLeft?.days ?? 0} label="Days" />
-      <div className="self-start pt-3 text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>
+      <div className="self-start pt-2 text-xl sm:text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>
         ·
       </div>
       <CountdownBox value={timeLeft?.hours ?? 0} label="Hours" />
-      <div className="self-start pt-3 text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>
+      <div className="self-start pt-2 text-xl sm:text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>
         ·
       </div>
       <CountdownBox value={timeLeft?.minutes ?? 0} label="Mins" />
-      <div className="self-start pt-3 text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>
+      <div className="self-start pt-2 text-xl sm:text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>
         ·
       </div>
       <CountdownBox value={timeLeft?.seconds ?? 0} label="Secs" />

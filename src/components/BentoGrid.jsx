@@ -14,7 +14,7 @@ const BentoCard = ({ children, className = '', delay = 0, noPadding = false }) =
     whileInView="show"
     viewport={{ once: true, margin: '-40px' }}
     transition={{ delay }}
-    className={`rounded-3xl overflow-hidden ${noPadding ? '' : 'p-6'} ${className}`}
+    className={`rounded-2xl sm:rounded-3xl overflow-hidden ${noPadding ? '' : 'p-4 sm:p-6'} ${className}`}
     style={{
       background: 'linear-gradient(145deg, rgba(22,17,6,0.92) 0%, rgba(12,9,3,0.97) 100%)',
       border: '1px solid rgba(212,175,55,0.13)',
@@ -45,37 +45,38 @@ const BentoGrid = () => (
       <div className="space-y-0">
         {wedding.schedule.map((item, i) => (
           <div key={i}
-            className="flex items-center gap-4 py-4"
+            className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 py-3 sm:py-4"
             style={{
               borderBottom: i < wedding.schedule.length - 1 ? '1px solid rgba(212,175,55,0.07)' : 'none',
             }}>
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              {/* Date pill */}
+              <div className="flex-shrink-0 text-center px-2.5 py-1.5 rounded-xl"
+                style={{
+                  background: 'rgba(212,175,55,0.07)',
+                  border: '1px solid rgba(212,175,55,0.14)',
+                  minWidth: '48px'
+                }}>
+                <p className="text-[8px] uppercase tracking-widest font-sans" style={{ color: 'rgba(212,175,55,0.5)' }}>
+                  {item.date.split(' ')[1]}
+                </p>
+                <p className="font-serif text-lg leading-none mt-0.5 gold-gradient-text">
+                  {item.date.split(' ')[0]}
+                </p>
+              </div>
 
-            {/* Date pill */}
-            <div className="flex-shrink-0 text-center px-3 py-2 rounded-xl"
-              style={{
-                background: 'rgba(212,175,55,0.07)',
-                border: '1px solid rgba(212,175,55,0.14)',
-                minWidth: '56px'
-              }}>
-              <p className="text-[8px] uppercase tracking-widest font-sans" style={{ color: 'rgba(212,175,55,0.5)' }}>
-                {item.date.split(' ')[1]}
-              </p>
-              <p className="font-serif text-xl leading-none mt-0.5 gold-gradient-text">
-                {item.date.split(' ')[0]}
-              </p>
-            </div>
+              {/* Vertical divider */}
+              <div className="w-px self-stretch" style={{ background: 'rgba(212,175,55,0.12)' }} />
 
-            {/* Vertical divider */}
-            <div className="w-px self-stretch" style={{ background: 'rgba(212,175,55,0.12)' }} />
-
-            {/* Event info */}
-            <div className="flex-1 min-w-0">
-              <p className="font-serif text-lg leading-tight" style={{ color: '#FAF6EE' }}>{item.event}</p>
-              <p className="text-[10px] font-sans mt-0.5" style={{ color: 'rgba(250,246,238,0.4)' }}>{item.desc}</p>
+              {/* Event info */}
+              <div className="flex-1 min-w-0">
+                <p className="font-serif text-base sm:text-lg leading-tight" style={{ color: '#FAF6EE' }}>{item.event}</p>
+                <p className="text-[10px] font-sans mt-0.5" style={{ color: 'rgba(250,246,238,0.4)' }}>{item.desc}</p>
+              </div>
             </div>
 
             {/* Time */}
-            <div className="flex-shrink-0 flex items-center gap-1.5">
+            <div className="flex-shrink-0 flex items-center gap-1.5 self-end sm:self-center pl-12 sm:pl-0">
               <Clock size={10} style={{ color: 'rgba(212,175,55,0.4)' }} />
               <span className="text-xs font-sans tabular-nums" style={{ color: 'rgba(212,175,55,0.55)' }}>
                 {item.time}

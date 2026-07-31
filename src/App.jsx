@@ -17,18 +17,9 @@ import { wedding } from './weddingConfig';
 
 function App() {
   const [isRevealed, setIsRevealed] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <div className="min-h-dvh bg-midnight text-cream overflow-x-hidden selection:bg-gold/30">
-      <AnimatePresence mode="wait">
-        {isLoading && <Preloader key="preloader" />}
-      </AnimatePresence>
 
       <ScrollProgress />
       <Particles />
@@ -54,11 +45,11 @@ function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
-            className="relative z-10 mx-auto w-full max-w-3xl md:max-w-4xl px-4 sm:px-6 md:px-8 bg-midnight min-h-dvh border-x border-white/5 shadow-2xl shadow-gold/5"
+            className="relative z-10 mx-auto w-full max-w-xl md:max-w-3xl px-3 sm:px-6 bg-midnight min-h-dvh shadow-2xl shadow-gold/5"
           >
 
             {/* ── HERO ── */}
-            <section className="relative pt-12 pb-16 px-6 flex flex-col items-center text-center overflow-hidden">
+            <section className="relative pt-12 pb-16 px-3 sm:px-6 flex flex-col items-center text-center overflow-hidden">
 
               {/* Top radial glow — no grey overlay */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[480px] h-[420px] pointer-events-none"
