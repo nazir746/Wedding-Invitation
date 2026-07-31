@@ -18,6 +18,8 @@ const BismillahCalligraphy = () => {
       <motion.img
         src="/assets/bismillah.png"
         alt="Bismillah ir-Rahman ir-Rahim"
+        decoding="async"
+        fetchPriority="high"
         initial={{ opacity: 0, y: 10 }}
         animate={{
           opacity: 1,
