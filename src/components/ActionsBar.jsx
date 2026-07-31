@@ -77,7 +77,7 @@ const ActionsBar = () => {
     }
   };
 
-  const waUrl = `https://wa.me/?text=${encodeURIComponent(`${shareText}\n${window.location.href}`)}`;
+  const waUrl = `https://wa.me/?text=${encodeURIComponent(`${window.location.href}\n\n${shareText}`)}`;
 
   return (
     <div className="mb-10">
