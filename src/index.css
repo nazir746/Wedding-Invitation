@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold: #D4AF37;
+  --gold-light: #F5E6A3;
+  --gold-pale: #FBF5E0;
+  --gold-dark: #8B6914;
+  --midnight: #070707;
+  --deep: #0D0B08;
+  --cream: #FAF6EE;
+  background-color: var(--midnight);
+  color-scheme: dark;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+  background-color: var(--midnight);
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+}
+
+input, select, textarea, button {
+  font-size: 16px;
+}
+
+/* ── Luxury Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #D4AF37, #8B6914); border-radius: 3px; }
+
+/* ── Gold Gradient Text ─────────────────────────────────────────── */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #D4AF37 0%, #F5E6A3 30%, #D4AF37 50%, #F0D060 70%, #B8860B 85%, #D4AF37 100%);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gold-shimmer 8s linear infinite;
+}
+
+@keyframes gold-shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 300% center; }
+}
+
+/* ── Premium Glass Card ──────────────────────────────────────────── */
+.glass-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(212,175,55,0.03) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.12);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.05) inset,
+    0 20px 60px rgba(0,0,0,0.5),
+    0 0 0 0.5px rgba(212,175,55,0.08);
+}
+
+/* ── Gold Glow Utility ───────────────────────────────────────────── */
+.gold-glow {
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.35), 0 0 60px rgba(212, 175, 55, 0.1);
+}
+
+.gold-text-glow {
+  text-shadow: 0 0 20px rgba(212,175,55,0.6), 0 0 40px rgba(212,175,55,0.2);
+}
+
+/* ── Envelope ────────────────────────────────────────────────────── */
+.envelope {
+  position: relative;
+  width: min(380px, 88vw);
+  aspect-ratio: 10 / 6.4;
+  cursor: pointer;
+  perspective: 1400px;
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #1E180A 0%, #120E06 60%, #0D0905 100%);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(212,175,55,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.envelope-letter {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 7%;
+  bottom: 6%;
+  z-index: 2;
+  border-radius: 10px;
+  background: linear-gradient(160deg, #FEFCF4 0%, #F4EDD5 50%, #EDE0C0 100%);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 56%;
+  z-index: 4;
+  transform-origin: top center;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: linear-gradient(175deg, #2A2010 0%, #1A1508 60%, #120F06 100%);
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.envelope-flap::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(212,175,55,0.08) 0%, transparent 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.envelope-front {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 50% 57%, 0 100%);
+  background: linear-gradient(155deg, #201808 0%, #140F05 80%);
+  border-radius: 16px;
+}
+
+.envelope-shadow {
+  position: absolute;
+  inset: 4% 6%;
+  border-radius: 16px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.5), transparent 70%);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* ── Islamic Pattern Overlay ─────────────────────────────────────── */
+.islamic-overlay {
+  background-image: 
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(212,175,55,0.02) 40px, rgba(212,175,55,0.02) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(212,175,55,0.02) 40px, rgba(212,175,55,0.02) 41px);
+}
+
+/* ── Aurora Blobs ────────────────────────────────────────────────── */
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+/* ── Section Divider ─────────────────────────────────────────────── */
+.gold-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.gold-divider::before,
+.gold-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4));
+  max-width: 100px;
+}
+
+.gold-divider::after {
+  background: linear-gradient(-90deg, transparent, rgba(212,175,55,0.4));
+}
+
+/* ── Countdown Number ────────────────────────────────────────────── */
+.countdown-box {
+  background: linear-gradient(180deg, rgba(212,175,55,0.08) 0%, rgba(212,175,55,0.03) 100%);
+  border: 1px solid rgba(212,175,55,0.15);
+  border-radius: 12px;
+  padding: 12px 16px;
+  min-width: 64px;
+  text-align: center;
+}
+
+/* ── Action Button ────────────────────────────────────────────────── */
+.action-btn {
+  background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(212,175,55,0.04) 100%);
+  border: 1px solid rgba(212,175,55,0.18);
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(212,175,55,0.08) 100%);
+  border-color: rgba(212,175,55,0.4);
+  box-shadow: 0 0 20px rgba(212,175,55,0.1);
+}
+
+/* ── Form Inputs ──────────────────────────────────────────────────── */
+.luxury-input {
+  background: rgba(212,175,55,0.03);
+  border: 1px solid rgba(212,175,55,0.15);
+  border-radius: 12px;
+  color: #FAF6EE;
+  transition: all 0.3s ease;
+  width: 100%;
+  padding: 14px 16px;
+}
+
+.luxury-input:focus {
+  outline: none;
+  border-color: rgba(212,175,55,0.5);
+  box-shadow: 0 0 0 3px rgba(212,175,55,0.06), 0 0 20px rgba(212,175,55,0.1);
+  background: rgba(212,175,55,0.05);
+}
+
+.luxury-input::placeholder {
+  color: rgba(250, 246, 238, 0.3);
+}
+
+/* ── Preloader Spinner ────────────────────────────────────────────── */
+@keyframes spin-gold {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Reduced Motion ───────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
