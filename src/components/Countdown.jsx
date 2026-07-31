@@ -60,15 +60,15 @@ const Countdown = ({ targetDate }) => {
     <div className="flex justify-center items-center gap-1.5 sm:gap-3 md:gap-5 w-full max-w-full">
       <CountdownBox value={timeLeft?.days ?? 0} label="Days" />
       <div className="self-start pt-2 text-xl sm:text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>
-        ·
+        :
       </div>
       <CountdownBox value={timeLeft?.hours ?? 0} label="Hours" />
       <div className="self-start pt-2 text-xl sm:text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>
-        ·
+        :
       </div>
       <CountdownBox value={timeLeft?.minutes ?? 0} label="Mins" />
       <div className="self-start pt-2 text-xl sm:text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>
-        ·
+        :
       </div>
       <CountdownBox value={timeLeft?.seconds ?? 0} label="Secs" />
     </div>

@@ -35,18 +35,11 @@ const BismillahCalligraphy = () => {
         }}
       />
 
-      {/* Elegant Arabic Calligraphy text placeholder while image decodes */}
+      {/* Empty space placeholder while image decodes */}
       {!loaded && (
-        <p
-          className="absolute font-sans text-xl tracking-wider text-center pointer-events-none z-10"
-          style={{
-            color: 'rgba(212,175,55,0.85)',
-            textShadow: '0 0 12px rgba(212,175,55,0.4)',
-            direction: 'rtl',
-          }}
-        >
-          بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
-        </p>
+        <div className="absolute inset-0 z-10 flex items-center justify-center">
+          <div className="w-8 h-8 border-2 border-gold/30 border-t-gold/70 rounded-full animate-spin" />
+        </div>
       )}
 
       {/* Bottom accent line */}

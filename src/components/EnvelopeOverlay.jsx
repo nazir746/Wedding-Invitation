@@ -28,7 +28,7 @@ const EnvelopeOverlay = ({ onReveal }) => {
       />
 
       <motion.div
-        initial={{ scale: 0.8, opacity: 0, y: 20 }}
+        initial={{ scale: 0.95, opacity: 1, y: 5 }}
         animate={{ scale: 1, opacity: 1, y: 0 }}
         transition={{ duration: 1.2, ease: [0.34, 1.56, 0.64, 1] }}
         className="relative z-10 flex flex-col items-center"
@@ -232,21 +232,6 @@ const EnvelopeOverlay = ({ onReveal }) => {
           </motion.div>
         </motion.div>
       </motion.div>
-
-      {/* Light burst reveal */}
-      {isRevealing && (
-        <motion.div
-          initial={{ scale: 0, opacity: 0.8 }}
-          animate={{ scale: 30, opacity: 0 }}
-          transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
-          className="absolute z-40 w-12 h-12 rounded-full pointer-events-none"
-          style={{
-            background: 'radial-gradient(circle, rgba(245,230,163,0.9) 0%, rgba(212,175,55,0.6) 30%, transparent 70%)',
-            filter: 'blur(4px)'
-          }}
-          aria-hidden="true"
-        />
-      )}
 
       {isRevealing && <Confetti />}
     </motion.div>
