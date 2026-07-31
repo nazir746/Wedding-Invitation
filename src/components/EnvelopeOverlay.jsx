@@ -2,15 +2,6 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import Confetti from './Confetti';
 
-// Generate star particle positions once at module scope so no impure
-// Math.random() calls happen during render.
-const STARS = Array.from({ length: 20 }, () => ({
-  left: Math.random() * 100,
-  top: Math.random() * 100,
-  duration: 2 + Math.random() * 3,
-  delay: Math.random() * 4,
-}));
-
 const EnvelopeOverlay = ({ onReveal }) => {
   const [isRevealing, setIsRevealing] = useState(false);
 
