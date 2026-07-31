@@ -36,8 +36,8 @@ function App() {
 
       {/* Mobile ambient glow */}
       <div className="fixed inset-0 md:hidden z-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div className="aurora-blob w-72 h-72 -top-20 -left-24 bg-gold/10 animate-aurora" />
-        <div className="aurora-blob w-80 h-80 -bottom-24 -right-28 bg-emerald/15 animate-aurora" style={{ animationDelay: '-7s' }} />
+        <div className="aurora-blob w-72 h-72 -top-20 -left-24 bg-gold/10 opacity-70" />
+        <div className="aurora-blob w-80 h-80 -bottom-24 -right-28 bg-emerald/15 opacity-60" />
       </div>
 
       {/* Desktop Ambient Background */}

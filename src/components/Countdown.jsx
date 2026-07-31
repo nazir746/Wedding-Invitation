@@ -1,33 +1,24 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const pad = (n) => String(n).padStart(2, '0');
 
 const CountdownBox = ({ value, label }) => (
-  <motion.div
-    className="countdown-box flex flex-col items-center min-w-[54px]"
-    whileHover={{ scale: 1.04 }}
-  >
-    <div className="w-12 h-10 flex items-center justify-center overflow-hidden">
-      <AnimatePresence mode="wait">
-        <motion.span
-          key={value}
-          initial={{ opacity: 0.3, y: -4 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0.3, y: 4 }}
-          transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="text-3xl md:text-4xl tabular-nums gold-gradient-text block text-center"
-          style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 300, lineHeight: 1 }}
-        >
-          {pad(value)}
-        </motion.span>
-      </AnimatePresence>
+  <div className="countdown-box flex flex-col items-center min-w-[56px]">
+    <div className="w-12 h-10 flex items-center justify-center">
+      <span
+        className="text-3xl md:text-4xl tabular-nums gold-gradient-text block text-center"
+        style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 300, lineHeight: 1 }}
+      >
+        {pad(value)}
+      </span>
     </div>
-    <span className="text-[9px] uppercase tracking-[0.3em] mt-2 font-sans"
-      style={{ color: 'rgba(212,175,55,0.45)' }}>
+    <span
+      className="text-[9px] uppercase tracking-[0.3em] mt-2 font-sans"
+      style={{ color: 'rgba(212,175,55,0.45)' }}
+    >
       {label}
     </span>
-  </motion.div>
+  </div>
 );
 
 const Countdown = ({ targetDate }) => {
@@ -38,7 +29,10 @@ const Countdown = ({ targetDate }) => {
     const tick = () => {
       const now = new Date().getTime();
       const distance = new Date(targetDate).getTime() - now;
-      if (distance < 0) { setHasReached(true); return; }
+      if (distance < 0) {
+        setHasReached(true);
+        return;
+      }
       setHasReached(false);
       setTimeLeft({
         days: Math.floor(distance / 86400000),
@@ -52,21 +46,30 @@ const Countdown = ({ targetDate }) => {
     return () => clearInterval(t);
   }, [targetDate]);
 
-  if (hasReached) return (
-    <p className="font-serif italic text-center"
-      style={{ color: 'rgba(212,175,55,0.8)', fontSize: '1.1rem' }}>
-      Alhamdulillah — the celebration is here!
-    </p>
-  );
+  if (hasReached)
+    return (
+      <p
+        className="font-serif italic text-center"
+        style={{ color: 'rgba(212,175,55,0.8)', fontSize: '1.1rem' }}
+      >
+        Alhamdulillah — the celebration is here!
+      </p>
+    );
 
   return (
     <div className="flex justify-center gap-3 md:gap-5">
       <CountdownBox value={timeLeft?.days ?? 0} label="Days" />
-      <div className="self-start pt-3 text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>·</div>
+      <div className="self-start pt-3 text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>
+        ·
+      </div>
       <CountdownBox value={timeLeft?.hours ?? 0} label="Hours" />
-      <div className="self-start pt-3 text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>·</div>
+      <div className="self-start pt-3 text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>
+        ·
+      </div>
       <CountdownBox value={timeLeft?.minutes ?? 0} label="Mins" />
-      <div className="self-start pt-3 text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>·</div>
+      <div className="self-start pt-3 text-2xl font-thin" style={{ color: 'rgba(212,175,55,0.25)' }}>
+        ·
+      </div>
       <CountdownBox value={timeLeft?.seconds ?? 0} label="Secs" />
     </div>
   );

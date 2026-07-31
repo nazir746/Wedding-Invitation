@@ -28,26 +28,13 @@ const EnvelopeOverlay = ({ onReveal }) => {
       className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
       style={{ background: 'radial-gradient(ellipse at center, #100D06 0%, #070707 60%, #040404 100%)' }}
     >
-      {/* Ambient gold vignette pulse */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        animate={{ opacity: [0.4, 0.7, 0.4] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+      {/* Ambient gold vignette background */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-50"
         style={{
           background: 'radial-gradient(ellipse 60% 50% at 50% 60%, rgba(212,175,55,0.08) 0%, transparent 70%)'
         }}
       />
-
-      {/* Fine star particles (CSS only) */}
-      {STARS.map((star, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-0.5 h-0.5 rounded-full bg-gold/40"
-          style={{ left: `${star.left}%`, top: `${star.top}%` }}
-          animate={{ opacity: [0, 0.8, 0], scale: [0, 1, 0] }}
-          transition={{ duration: star.duration, repeat: Infinity, delay: star.delay, ease: 'easeInOut' }}
-        />
-      ))}
 
       <motion.div
         initial={{ scale: 0.8, opacity: 0, y: 20 }}
