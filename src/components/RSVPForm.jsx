@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Heart } from 'lucide-react';
-import { submitRsvp } from '../lib/supabase';
+import { submitRsvp } from '../lib/email';
 import { wedding } from '../weddingConfig';
 
 const STORAGE_KEY = 'wedding-rsvp';
@@ -47,22 +47,29 @@ const RSVPForm = () => {
     setIsSubmitting(true);
     setError(null);
 
-    // Send straight to the rsvp-notify Edge Function (email only, no storage).
-    // Include the honeypot + start time so the function can filter bots.
-    const { error: submitError } = await submitRsvp({
-      ...formData,
-      website: honeypot,               // honeypot — always '' for real humans
-      started_at: startedAtRef.current, // form mount time (epoch ms); set on mount
-    });
+    // Spam protection now runs client-side (no backend): a hidden honeypot
+    // field + a minimum time after the form mounts. Real humans take >1.5s.
+    const elapsed = startedAtRef.current === null ? null : Date.now() - startedAtRef.current;
+    const looksLikeBot = honeypot.trim().length > 0 || (elapsed !== null && elapsed >= 0 && elapsed < 1500);
+    if (looksLikeBot) {
+      // Pretend success so bots can't tell they were caught.
+      setIsSubmitting(false);
+      setSubmitted(true);
+      return;
+    }
+
+    // Send straight to EmailJS (no backend, no storage).
+    const { error: submitError } = await submitRsvp(formData);
     setIsSubmitting(false);
 
     if (submitError) {
-      console.warn('RSVP submission failed. Check .env.local / Supabase setup.', submitError);
-      if (submitError?.context?.status === 429) {
-        setError('Too many RSVPs from this device — please try again in a few minutes.');
-      } else {
-        setError('Sorry, we could not send your response. Please try again.');
-      }
+      console.warn('RSVP email failed. Check your EmailJS env vars / template.', submitError);
+      const isRateLimited = submitError?.status === 429 || /wait|rate|too many/i.test(submitError?.text ?? '');
+      setError(
+        isRateLimited
+          ? 'Too many RSVPs from this device — please try again in a few minutes.'
+          : 'Sorry, we could not send your response. Please try again.',
+      );
       return;
     }
 

@@ -5,27 +5,29 @@ import { wedding } from '../weddingConfig';
 
 const AudioToggle = () => {
   const [isPlaying, setIsPlaying] = useState(true);
+  const [userMuted, setUserMuted] = useState(false);
   const audioRef = useRef(null);
 
   useEffect(() => {
-    const playAudio = () => {
-      if (audioRef.current && audioRef.current.paused) {
+    if (userMuted) return;
+
+    const attemptPlay = () => {
+      if (audioRef.current && audioRef.current.paused && !userMuted) {
         audioRef.current
           .play()
           .then(() => setIsPlaying(true))
-          .catch(() => {
-            /* browser autoplay restriction will resolve on first user tap */
-          });
+          .catch(() => setIsPlaying(false));
       }
     };
 
-    // Attempt autoplay immediately
-    playAudio();
+    attemptPlay();
 
-    // Listen for any user click/tap gesture on page to unblock autoplay
     const handleFirstGesture = () => {
-      if (audioRef.current && audioRef.current.paused && isPlaying) {
-        audioRef.current.play().catch(() => {});
+      if (!userMuted && audioRef.current && audioRef.current.paused) {
+        audioRef.current
+          .play()
+          .then(() => setIsPlaying(true))
+          .catch(() => {});
       }
     };
 
@@ -36,16 +38,20 @@ const AudioToggle = () => {
       window.removeEventListener('click', handleFirstGesture);
       window.removeEventListener('touchstart', handleFirstGesture);
     };
-  }, [isPlaying]);
+  }, [userMuted]);
 
   const toggleAudio = (e) => {
     e.stopPropagation();
     if (isPlaying) {
       audioRef.current?.pause();
       setIsPlaying(false);
+      setUserMuted(true);
     } else {
-      audioRef.current?.play().then(() => setIsPlaying(true)).catch(() => {});
-      setIsPlaying(true);
+      setUserMuted(false);
+      audioRef.current
+        ?.play()
+        .then(() => setIsPlaying(true))
+        .catch(() => {});
     }
   };
 
