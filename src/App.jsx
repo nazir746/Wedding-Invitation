@@ -42,10 +42,6 @@ function App() {
 
       {/* Desktop Ambient Background */}
       <div className="fixed inset-0 hidden md:block z-0 pointer-events-none">
-        <div
-          className="absolute inset-0 bg-cover bg-center blur-3xl opacity-20 scale-110"
-          style={{ backgroundImage: "url('/assets/archway.png')" }}
-        />
         <div className="absolute inset-0 bg-gradient-to-b from-midnight via-transparent to-midnight" />
       </div>
 
@@ -60,11 +56,6 @@ function App() {
             transition={{ duration: 1 }}
             className="relative z-10 mx-auto max-w-lg md:shadow-2xl md:shadow-gold/5 bg-midnight min-h-dvh border-x border-white/5"
           >
-            {/* Subtle noise texture */}
-            <div
-              className="absolute inset-0 opacity-[0.025] pointer-events-none bg-repeat"
-              style={{ backgroundImage: "url('/assets/pattern.png')", backgroundSize: '200px' }}
-            />
 
             {/* ── HERO ── */}
             <section className="relative pt-12 pb-16 px-6 flex flex-col items-center text-center overflow-hidden">

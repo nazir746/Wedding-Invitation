@@ -5,22 +5,24 @@ const pad = (n) => String(n).padStart(2, '0');
 
 const CountdownBox = ({ value, label }) => (
   <motion.div
-    className="countdown-box flex flex-col items-center"
+    className="countdown-box flex flex-col items-center min-w-[56px]"
     whileHover={{ scale: 1.05 }}
   >
-    <AnimatePresence mode="popLayout">
-      <motion.span
-        key={value}
-        initial={{ y: -12, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        exit={{ y: 12, opacity: 0 }}
-        transition={{ duration: 0.35, ease: 'easeOut' }}
-        className="text-3xl md:text-4xl tabular-nums gold-gradient-text"
-        style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 300, lineHeight: 1 }}
-      >
-        {pad(value)}
-      </motion.span>
-    </AnimatePresence>
+    <div className="w-12 h-10 relative overflow-hidden flex items-center justify-center">
+      <AnimatePresence mode="popLayout">
+        <motion.span
+          key={value}
+          initial={{ y: -16, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 16, opacity: 0 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl tabular-nums gold-gradient-text"
+          style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 300, lineHeight: 1 }}
+        >
+          {pad(value)}
+        </motion.span>
+      </AnimatePresence>
+    </div>
     <span className="text-[9px] uppercase tracking-[0.3em] mt-2 font-sans"
       style={{ color: 'rgba(212,175,55,0.45)' }}>
       {label}

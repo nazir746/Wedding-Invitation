@@ -33,6 +33,8 @@ const BismillahCalligraphy = () => {
           width: '260px',
           height: 'auto',
           display: 'block',
+          mixBlendMode: 'screen',
+          background: 'transparent',
           filter: 'drop-shadow(0 0 18px rgba(212,175,55,0.45)) drop-shadow(0 0 6px rgba(212,175,55,0.2))',
           position: 'relative',
           zIndex: 10,
