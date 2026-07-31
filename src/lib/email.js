@@ -12,9 +12,9 @@ import emailjs from '@emailjs/browser';
 //
 // The EmailJS template should use these variables:
 //   {{from_name}}  {{attendance}}  {{wishes}}  {{created_at}}  {{to_name}}
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_khgode4';
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_8q6u4nm';
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'Pmu2M5oKU8bLLFS1l';
 
 // Browser-side rate limiting (EmailJS built-in): at most one send per 5s per
 // browser. Safe to call repeatedly — init is idempotent.
