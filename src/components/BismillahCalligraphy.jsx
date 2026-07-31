@@ -21,14 +21,8 @@ const BismillahCalligraphy = () => {
         decoding="async"
         fetchPriority="high"
         initial={{ opacity: 0, y: 10 }}
-        animate={{
-          opacity: 1,
-          y: [0, -6, 0],
-        }}
-        transition={{
-          opacity: { duration: 1.2, ease: 'easeOut' },
-          y: { duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.2 },
-        }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
         style={{
           width: '260px',
           height: 'auto',

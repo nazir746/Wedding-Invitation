@@ -171,11 +171,11 @@ const EnvelopeOverlay = ({ onReveal }) => {
             <motion.div
               animate={isRevealing
                 ? { scale: [1, 1.8, 0], opacity: [1, 1, 0] }
-                : { scale: [1, 1.06, 1] }
+                : { scale: 1, opacity: 1 }
               }
               transition={isRevealing
                 ? { duration: 1, delay: 0.2, ease: 'easeInOut' }
-                : { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+                : { duration: 0.3 }
               }
               style={{
                 filter: 'drop-shadow(0 0 20px rgba(212,175,55,0.7)) drop-shadow(0 0 40px rgba(212,175,55,0.3))'

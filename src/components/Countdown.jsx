@@ -5,18 +5,18 @@ const pad = (n) => String(n).padStart(2, '0');
 
 const CountdownBox = ({ value, label }) => (
   <motion.div
-    className="countdown-box flex flex-col items-center min-w-[56px]"
-    whileHover={{ scale: 1.05 }}
+    className="countdown-box flex flex-col items-center min-w-[54px]"
+    whileHover={{ scale: 1.04 }}
   >
-    <div className="w-12 h-10 relative overflow-hidden flex items-center justify-center">
-      <AnimatePresence mode="popLayout">
+    <div className="w-12 h-10 flex items-center justify-center overflow-hidden">
+      <AnimatePresence mode="wait">
         <motion.span
           key={value}
-          initial={{ y: -16, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 16, opacity: 0 }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="absolute inset-0 flex items-center justify-center text-3xl md:text-4xl tabular-nums gold-gradient-text"
+          initial={{ opacity: 0.3, y: -4 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0.3, y: 4 }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
+          className="text-3xl md:text-4xl tabular-nums gold-gradient-text block text-center"
           style={{ fontFamily: '"Cormorant Garamond", serif', fontWeight: 300, lineHeight: 1 }}
         >
           {pad(value)}

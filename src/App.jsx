@@ -54,7 +54,7 @@ function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
-            className="relative z-10 mx-auto max-w-lg md:shadow-2xl md:shadow-gold/5 bg-midnight min-h-dvh border-x border-white/5"
+            className="relative z-10 mx-auto w-full max-w-3xl md:max-w-4xl px-4 sm:px-6 md:px-8 bg-midnight min-h-dvh border-x border-white/5 shadow-2xl shadow-gold/5"
           >
 
             {/* ── HERO ── */}

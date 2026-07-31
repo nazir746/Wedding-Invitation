@@ -83,7 +83,7 @@ input, select, textarea, button {
 /* ── Envelope ────────────────────────────────────────────────────── */
 .envelope {
   position: relative;
-  width: min(380px, 88vw);
+  width: min(440px, 90vw);
   aspect-ratio: 10 / 6.4;
   cursor: pointer;
   perspective: 1400px;
